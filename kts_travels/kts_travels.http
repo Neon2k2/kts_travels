@@ -1,0 +1,6 @@
+@kts_travels_HostAddress = http://localhost:5064
+
+GET {{kts_travels_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
