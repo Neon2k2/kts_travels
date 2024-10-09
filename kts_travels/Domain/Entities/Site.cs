@@ -9,5 +9,6 @@ namespace kts_travels.Domain.Entities
         public string SiteName { get; set; }
 
         public ICollection<TripLog> TripLogs { get; set; }
+        public ICollection<VehicleSummary> VehicleSummaries { get; set; }
     }
 }

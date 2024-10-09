@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace kts_travels.WebAPI.Configuration
 {
-    public class VehicleSummaryConfiguration : IEntityTypeConfiguration<VehicleSummary>
+    public class VehicleSummariesConfiguration : IEntityTypeConfiguration<VehicleSummary>
     {
         public void Configure(EntityTypeBuilder<VehicleSummary> builder)
         {

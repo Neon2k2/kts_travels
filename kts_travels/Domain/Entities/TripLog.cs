@@ -7,13 +7,13 @@ namespace kts_travels.Domain.Entities
         [Key]
         public int TripId { get; set; }
 
-        public int VehicleId { get; set; } // Foreign key to reference the Vehicle
+        public int VehicleId { get; set; }
         public Vehicle Vehicle { get; set; }
 
 
         [Required(ErrorMessage = "Location is required.")]
-        public int LocationId { get; set; } // Foreign key to Site
-        public Site Location { get; set; } // Navigation property to Site
+        public int LocationId { get; set; }
+        public Site Location { get; set; }
 
         [Required(ErrorMessage = "Date is required.")]
         public DateTime Date { get; set; }

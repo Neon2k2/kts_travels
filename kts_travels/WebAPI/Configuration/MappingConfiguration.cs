@@ -10,6 +10,7 @@ namespace kts_travels.WebAPI.Configuration
         {
             CreateMap<TripLogDto, TripLog>().ReverseMap();
             CreateMap<VehicleDto, Vehicle>().ReverseMap();
+            CreateMap<VehicleSummaryDto, VehicleSummary>().ReverseMap();
         }
     }
 }

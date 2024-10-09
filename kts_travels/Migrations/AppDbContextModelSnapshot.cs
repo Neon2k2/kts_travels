@@ -113,6 +113,9 @@ namespace kts_travels.Migrations
                     b.Property<int>("ClosingKms")
                         .HasColumnType("int");
 
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Month")
                         .HasColumnType("datetime2");
 
@@ -135,6 +138,8 @@ namespace kts_travels.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("SummaryId");
+
+                    b.HasIndex("LocationId");
 
                     b.HasIndex("VehicleId");
 
@@ -162,11 +167,19 @@ namespace kts_travels.Migrations
 
             modelBuilder.Entity("kts_travels.Domain.Entities.VehicleSummary", b =>
                 {
+                    b.HasOne("kts_travels.Domain.Entities.Site", "Location")
+                        .WithMany("VehicleSummaries")
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("kts_travels.Domain.Entities.Vehicle", "Vehicle")
                         .WithMany()
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Location");
 
                     b.Navigation("Vehicle");
                 });
@@ -174,6 +187,8 @@ namespace kts_travels.Migrations
             modelBuilder.Entity("kts_travels.Domain.Entities.Site", b =>
                 {
                     b.Navigation("TripLogs");
+
+                    b.Navigation("VehicleSummaries");
                 });
 
             modelBuilder.Entity("kts_travels.Domain.Entities.Vehicle", b =>

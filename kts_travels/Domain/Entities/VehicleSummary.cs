@@ -7,18 +7,55 @@ namespace kts_travels.Domain.Entities
     {
         [Key]
         public int SummaryId { get; set; }
-        public int SRNo { get; set; } // Unique identifier (serial number)
+        public int SRNo { get; set; }
         public DateTime Month { get; set; }
-        public int VehicleId { get; set; } // Foreign key to reference the Vehicle
-        public Vehicle Vehicle { get; set; } // Navigation property for the Vehicle
-        public int TotalDaysFilledDiesel { get; set; } // Total days diesel was filled in the vehicle
-        public decimal TotalDiesel { get; set; } // Total diesel filled (in liters)
-        public int OpeningKms { get; set; } // Initial kilometer reading for the vehicle
-        public int ClosingKms { get; set; } // Final kilometer reading for the vehicle
-        public int TotalKmRun { get; set; } // Total kilometers run
-        public decimal Average { get; set; } // Average kilometers per liter (TotalKmRun / TotalDiesel)
+        public int VehicleId { get; set; }
+        public Vehicle Vehicle { get; set; }
+        public int LocationId { get; set; }
+        public Site Location { get; set; }
+        public int TotalDaysFilledDiesel { get; set; }
+        public decimal TotalDiesel { get; set; }
+        public int OpeningKms { get; set; }
+        public int ClosingKms { get; set; }
+        public int TotalKmRun { get; set; }
+        public decimal Average { get; set; }
 
-        // Foreign key to the Vehicle table
+        // Constructor for easy initialization
+        public VehicleSummary(int vehicleId, int locationId, DateTime month,
+                              int totalDaysFilledDiesel, decimal totalDiesel,
+                              int openingKms, int closingKms,
+                              int totalKmRun, decimal average)
+        {
+            VehicleId = vehicleId;
+            LocationId = locationId;
+            Month = month;
+            TotalDaysFilledDiesel = totalDaysFilledDiesel;
+            TotalDiesel = totalDiesel;
+            OpeningKms = openingKms;
+            ClosingKms = closingKms;
+            TotalKmRun = totalKmRun;
+            Average = average;
+        }
+
+        // Method to update summary fields
+        public void UpdateSummary(int totalDaysFilledDiesel, decimal totalDiesel,
+                                  int openingKms, int closingKms,
+                                  int totalKmRun, decimal average)
+        {
+            TotalDaysFilledDiesel = totalDaysFilledDiesel;
+            TotalDiesel = totalDiesel;
+            OpeningKms = openingKms;
+            ClosingKms = closingKms;
+            TotalKmRun = totalKmRun;
+            Average = average;
+        }
+
+        public override string ToString()
+        {
+            return $"SummaryId: {SummaryId}, Month: {Month.ToString("MMMM yyyy")}, VehicleId: {VehicleId}, TotalKmRun: {TotalKmRun}, Average: {Average}";
+        }
 
     }
+
+
 }

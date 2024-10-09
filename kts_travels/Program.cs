@@ -30,6 +30,8 @@ builder.Services.AddControllers()
 // Register Services
 builder.Services.AddScoped<ITripLogService, TripLogService>();
 builder.Services.AddScoped<IVehicleService, VehicleService>();
+builder.Services.AddScoped<IVehicleSummariesService, VehicleSummariesService>();
+builder.Services.AddScoped<IVehicleSummariesFactory, VehicleSummariesFactory>();
 builder.Services.AddScoped<IExcelImportService, ExcelImportService>();
 builder.Services.AddScoped<ITripLogFactory, TripLogFactory>();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
@@ -37,6 +39,7 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 // Register Repositories
 builder.Services.AddScoped<ITripLogRepository, TripLogRepository>();
 builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
+builder.Services.AddScoped<IVehicleSummariesRepository, VehicleSummariesRepository>();
 
 
 
