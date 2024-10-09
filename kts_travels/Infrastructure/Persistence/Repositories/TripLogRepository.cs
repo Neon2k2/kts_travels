@@ -25,6 +25,15 @@ namespace kts_travels.Infrastructure.Persistence.Repositories
                 .OrderByDescending(t => t.Date)
                 .FirstOrDefaultAsync();
         }
+        public async Task<IEnumerable<TripLog>> GetTripLogsForVehicleAndMonthAsync(string vehicleNo, DateTime month)
+        {
+            var startDate = new DateTime(month.Year, month.Month, 1);
+            var endDate = startDate.AddMonths(1);
+
+            return await _context.TripLogs
+                .Where(tl => tl.VehicleNO == vehicleNo && tl.Date >= startDate && tl.Date < endDate)
+                .ToListAsync();
+        }
 
         public async Task<TripLog> GetTripLogByStartingKmAsync(string vehicleNo, int startingKm)
         {
@@ -59,6 +68,11 @@ namespace kts_travels.Infrastructure.Persistence.Repositories
                 .Take(pageSize)
                 .ToListAsync();
             return tripLogs;
+        }
+        public async Task<IEnumerable<TripLog>> GetAllTripLogsAsync()
+        {
+            var triplogs = await _context.TripLogs.ToListAsync();
+            return triplogs;
         }
 
         public async Task<TripLog> GetTripLogByIdAsync(int id)
@@ -103,6 +117,7 @@ namespace kts_travels.Infrastructure.Persistence.Repositories
             var result = await _context.SaveChangesAsync();
             return result > 0;
         }
+
 
     }
 }

@@ -9,12 +9,13 @@ using kts_travels.Domain.Entities;
 
 namespace kts_travels.Application.Services
 {
-    public class TripLogService(ITripLogRepository tripLogRepository, IVehicleRepository vehicleRepository, ITripLogFactory tripLogFactory, IMapper mapper) : ITripLogService
+    public class TripLogService(ITripLogRepository tripLogRepository, IVehicleRepository vehicleRepository, ITripLogFactory tripLogFactory, IMapper mapper, IVehicleSummariesFactory vehicleSummaryFactory) : ITripLogService
     {
         private readonly ITripLogRepository _tripLogRepository = tripLogRepository;
         private readonly IVehicleRepository _vehicleRepository = vehicleRepository;
         private readonly ITripLogFactory _tripLogFactory = tripLogFactory;
         private readonly IMapper _mapper = mapper;
+        private readonly IVehicleSummariesFactory _vehicleSummaryFactory = vehicleSummaryFactory;
 
         public async Task<ResponseDto> AddTripLogAsync(TripLogDto triplogDto)
         {
@@ -48,6 +49,18 @@ namespace kts_travels.Application.Services
 
                 if (result)
                 {
+                    // Get the month for VehicleSummary
+                    var month = new DateTime(triplogDto.Date.Year, triplogDto.Date.Month, 1);
+                    var tripLogs = await _tripLogRepository.GetTripLogsForVehicleAndMonthAsync(triplogDto.VehicleNo, month);
+
+                    // Update or create the VehicleSummary
+                    await _vehicleSummaryFactory.CreateOrUpdateVehicleSummaryAsync(
+                        tripLog.VehicleId, // Assuming you have VehicleId in tripLog
+                        tripLog.LocationId, // Assuming you have LocationId in tripLog
+                        month,
+                        tripLogs
+                    );
+
                     return new ResponseDto { IsSuccess = true, Message = "Trip log added successfully." };
                 }
                 return new ResponseDto { IsSuccess = false, Message = "Failed to add trip log." };
@@ -57,8 +70,6 @@ namespace kts_travels.Application.Services
                 return new ResponseDto { IsSuccess = false, Message = ex.Message };
             }
         }
-
-
 
         public async Task<ResponseDto> GetTripLogByIdAsync(int id)
         {
@@ -144,18 +155,42 @@ namespace kts_travels.Application.Services
         {
             try
             {
+                // Fetch the trip log to be deleted
+                var tripLogToDelete = await _tripLogRepository.GetTripLogByIdAsync(id);
+                if (tripLogToDelete == null)
+                {
+                    return new ResponseDto { IsSuccess = false, Message = "Trip log not found." };
+                }
+
+                var vehicleNo = tripLogToDelete.VehicleNO;
+                var month = new DateTime(tripLogToDelete.Date.Year, tripLogToDelete.Date.Month, 1);
+
+                // Delete the trip log
                 var result = await _tripLogRepository.DeleteTripLogAsync(id);
                 if (result)
                 {
+                    // Get remaining trip logs for the vehicle for the specific month
+                    var tripLogs = await _tripLogRepository.GetTripLogsForVehicleAndMonthAsync(vehicleNo, month);
+
+                    // Update the VehicleSummary
+                    await _vehicleSummaryFactory.CreateOrUpdateVehicleSummaryAsync(
+                        tripLogToDelete.VehicleId, // Assuming you have VehicleId in tripLogToDelete
+                        tripLogToDelete.LocationId, // Assuming you have LocationId in tripLogToDelete
+                        month,
+                        tripLogs
+                    );
+
                     return new ResponseDto { IsSuccess = true, Message = "Trip log deleted successfully." };
                 }
-                return new ResponseDto { IsSuccess = false, Message = "Trip log not found." };
+
+                return new ResponseDto { IsSuccess = false, Message = "Failed to delete trip log." };
             }
             catch (Exception ex)
             {
                 return new ResponseDto { IsSuccess = false, Message = ex.Message };
             }
         }
+
 
         public async Task<ResponseDto> SearchTripLogsByDateRangeAsync(DateTime startDate, DateTime endDate)
         {

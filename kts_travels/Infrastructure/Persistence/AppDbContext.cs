@@ -14,7 +14,7 @@ namespace kts_travels.Infrastructure.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new TripLogConfiguration());
-            modelBuilder.ApplyConfiguration(new VehicleSummaryConfiguration());
+            modelBuilder.ApplyConfiguration(new VehicleSummariesConfiguration());
         }
     }
 

@@ -8,10 +8,12 @@ namespace kts_travels.Domain.Repositories
         Task<TripLog> GetLatestTripLogBeforeDateAsync(string vehicleNo, DateTime date);
         Task<TripLog> GetTripLogByStartingKmAsync(string vehicleNo, int startingKm);
         Task<IEnumerable<TripLog>> GetAllTripLogsAsync(int pageNumber, int pageSize);
+        Task<IEnumerable<TripLog>> GetAllTripLogsAsync();
         Task<bool> AddTripLogAsync(TripLog tripLog);
         Task<bool> UpdateTripLogAsync(TripLog tripLog);
         Task<bool> DeleteTripLogAsync(int id);
         Task<IEnumerable<TripLog>> SearchTripLogsByVehicleNoAsync(string vehicleNo);
         Task<IEnumerable<TripLog>> SearchTripLogsByDateRangeAsync(DateTime startDate, DateTime endDate);
+        Task<IEnumerable<TripLog>> GetTripLogsForVehicleAndMonthAsync(string vehicleNo, DateTime month);
     }
 }

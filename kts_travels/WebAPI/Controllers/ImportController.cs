@@ -9,10 +9,12 @@ namespace kts_travels.WebAPI.Controllers
     public class ImportController : ControllerBase
     {
         private readonly IExcelImportService _excelImportService;
+        private readonly IVehicleSummariesService _service;
 
-        public ImportController(IExcelImportService excelImportService)
+        public ImportController(IExcelImportService excelImportService, IVehicleSummariesService service)
         {
             _excelImportService = excelImportService;
+            _service = service;
         }
 
         [HttpPost("import-excel")]
@@ -29,6 +31,7 @@ namespace kts_travels.WebAPI.Controllers
                 {
                     await _excelImportService.ImportDataFromExcelAsync(stream);
                 }
+                await _service.UpdateVehicleSummariesFromTripLogsAsync();
                 return Ok("Data imported successfully.");
             }
             catch (Exception ex)

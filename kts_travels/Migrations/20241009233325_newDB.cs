@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace kts_travels.Migrations
 {
     /// <inheritdoc />
-    public partial class newDbMigration : Migration
+    public partial class newDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -78,6 +78,7 @@ namespace kts_travels.Migrations
                     SRNo = table.Column<int>(type: "int", nullable: false),
                     Month = table.Column<DateTime>(type: "datetime2", nullable: false),
                     VehicleId = table.Column<int>(type: "int", nullable: false),
+                    LocationId = table.Column<int>(type: "int", nullable: false),
                     TotalDaysFilledDiesel = table.Column<int>(type: "int", nullable: false),
                     TotalDiesel = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     OpeningKms = table.Column<int>(type: "int", nullable: false),
@@ -88,6 +89,12 @@ namespace kts_travels.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_VehicleSummary", x => x.SummaryId);
+                    table.ForeignKey(
+                        name: "FK_VehicleSummary_Sites_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "Sites",
+                        principalColumn: "SiteId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_VehicleSummary_Vehicles_VehicleId",
                         column: x => x.VehicleId,
@@ -105,6 +112,11 @@ namespace kts_travels.Migrations
                 name: "IX_TripLog_VehicleId",
                 table: "TripLog",
                 column: "VehicleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VehicleSummary_LocationId",
+                table: "VehicleSummary",
+                column: "LocationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_VehicleSummary_VehicleId",
