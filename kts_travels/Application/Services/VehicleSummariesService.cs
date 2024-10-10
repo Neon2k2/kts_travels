@@ -149,7 +149,7 @@ namespace kts_travels.Application.Services
                 SummaryId = summary.SummaryId,
                 SRNo = summary.SRNo,
                 Month = summary.Month,
-                VehicleNo = firstTripLog.VehicleNO,
+                VehicleNo = firstTripLog.Vehicle.VehicleNo,
                 LocationId = summary.LocationId,
                 TotalDaysFilledDiesel = summary.TotalDaysFilledDiesel,
                 TotalDiesel = summary.TotalDiesel,

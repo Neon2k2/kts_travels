@@ -12,8 +12,8 @@ using kts_travels.Infrastructure.Persistence;
 namespace kts_travels.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241009233325_newDB")]
-    partial class newDB
+    [Migration("20241010003452_newDb")]
+    partial class newDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,11 +63,6 @@ namespace kts_travels.Migrations
 
                     b.Property<int>("VehicleId")
                         .HasColumnType("int");
-
-                    b.Property<string>("VehicleNO")
-                        .IsRequired()
-                        .HasMaxLength(17)
-                        .HasColumnType("nvarchar(17)");
 
                     b.HasKey("TripId");
 

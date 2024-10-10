@@ -61,11 +61,6 @@ namespace kts_travels.Migrations
                     b.Property<int>("VehicleId")
                         .HasColumnType("int");
 
-                    b.Property<string>("VehicleNO")
-                        .IsRequired()
-                        .HasMaxLength(17)
-                        .HasColumnType("nvarchar(17)");
-
                     b.HasKey("TripId");
 
                     b.HasIndex("LocationId");

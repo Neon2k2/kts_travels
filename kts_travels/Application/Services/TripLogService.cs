@@ -140,6 +140,17 @@ namespace kts_travels.Application.Services
                 var result = await _tripLogRepository.UpdateTripLogAsync(updatedTripLog);
                 if (result)
                 {
+                    var month = new DateTime(triplogDto.Date.Year, triplogDto.Date.Month, 1);
+                    var tripLogs = await _tripLogRepository.GetTripLogsForVehicleAndMonthAsync(triplogDto.VehicleNo, month);
+
+                    // Update or create the VehicleSummary
+                    await _vehicleSummaryFactory.CreateOrUpdateVehicleSummaryAsync(
+                        updatedTripLog.VehicleId, // Assuming you have VehicleId in tripLog
+                        updatedTripLog.LocationId, // Assuming you have LocationId in tripLog
+                        month,
+                        tripLogs
+                    );
+
                     return new ResponseDto { IsSuccess = true, Message = "Trip log updated successfully." };
                 }
                 return new ResponseDto { IsSuccess = false, Message = "Failed to update trip log." };
@@ -162,7 +173,7 @@ namespace kts_travels.Application.Services
                     return new ResponseDto { IsSuccess = false, Message = "Trip log not found." };
                 }
 
-                var vehicleNo = tripLogToDelete.VehicleNO;
+                var vehicleNo = tripLogToDelete.Vehicle.VehicleNo;
                 var month = new DateTime(tripLogToDelete.Date.Year, tripLogToDelete.Date.Month, 1);
 
                 // Delete the trip log
