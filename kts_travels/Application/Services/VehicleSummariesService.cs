@@ -1,13 +1,13 @@
-﻿using kts_travels.Application.Dtos;
-using kts_travels.Application.Factories.Interfaces;
-using kts_travels.Application.Services.Interfaces;
-using kts_travels.Domain.Repositories;
-using kts_travels.Domain.Entities;
-using kts_travels.Infrastructure.Persistence.Repositories;
+﻿using kts_travels.SharedServices.Application.Dtos;
+using kts_travels.SharedServices.Application.Factories.Interfaces;
+using kts_travels.SharedServices.Application.Services.Interfaces;
+using kts_travels.SharedServices.Domain.Repositories;
+using kts_travels.SharedServices.Domain.Entities;
+using kts_travels.SharedServices.Infrastructure.Persistence.Repositories;
 using AutoMapper;
 using System.Drawing.Printing;
 
-namespace kts_travels.Application.Services
+namespace kts_travels.SharedServices.Application.Services
 {
     public class VehicleSummariesService : IVehicleSummariesService
     {

@@ -1,8 +1,8 @@
-﻿using kts_travels.Domain.Entities;
+﻿using kts_travels.SharedServices.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace kts_travels.WebAPI.Configuration
+namespace kts_travels.SharedServices.Application.Configuration
 {
     public class TripLogConfiguration : IEntityTypeConfiguration<TripLog>
     {

@@ -1,9 +1,9 @@
-﻿using kts_travels.Application.Dtos;
-using kts_travels.Application.Factories.Interfaces;
-using kts_travels.Domain.Entities;
-using kts_travels.Domain.Repositories;
+﻿using kts_travels.SharedServices.Application.Dtos;
+using kts_travels.SharedServices.Application.Factories.Interfaces;
+using kts_travels.SharedServices.Domain.Entities;
+using kts_travels.SharedServices.Domain.Repositories;
 
-namespace kts_travels.Application.Factories
+namespace kts_travels.SharedServices.Application.Factories
 {
     public class VehicleSummariesFactory(IVehicleSummariesRepository vehicleSummaryRepository) : IVehicleSummariesFactory
     {

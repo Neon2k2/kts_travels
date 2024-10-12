@@ -1,7 +1,7 @@
-﻿using kts_travels.Application.Dtos;
-using kts_travels.Domain.Entities;
+﻿using kts_travels.SharedServices.Application.Dtos;
+using kts_travels.SharedServices.Domain.Entities;
 
-namespace kts_travels.Domain.Repositories
+namespace kts_travels.SharedServices.Domain.Repositories
 {
     public interface IVehicleSummariesRepository
     {

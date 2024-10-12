@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace kts_travels.Migrations
+namespace kts_travels.SharedServices.Migrations
 {
     /// <inheritdoc />
     public partial class newDb : Migration

@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace kts_travels.Migrations
+namespace kts_travels.SharedServices.Migrations
 {
     /// <inheritdoc />
-    public partial class modifiedTripLog : Migration
+    public partial class ModifiedTripLog : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

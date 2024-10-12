@@ -1,12 +1,12 @@
-﻿using kts_travels.Application.Services.Interfaces;
-using kts_travels.Domain.Entities;
-using kts_travels.Infrastructure.Persistence;
+﻿using kts_travels.SharedServices.Application.Services.Interfaces;
+using kts_travels.SharedServices.Domain.Entities;
+using kts_travels.SharedServices.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using OfficeOpenXml;
 
-namespace kts_travels.Application.Services
+namespace kts_travels.SharedServices.Application.Services
 {
     public class ExcelImportService(AppDbContext context, ILogger<ExcelImportService> logger) : IExcelImportService
     {
