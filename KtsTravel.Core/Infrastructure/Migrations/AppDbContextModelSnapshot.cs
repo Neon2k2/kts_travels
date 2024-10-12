@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using kts_travels.Infrastructure.Persistence;
+using kts_travels.Core.Infrastructure.Persistence;
 
 #nullable disable
 
-namespace kts_travels.Migrations
+namespace kts_travels.Core.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
@@ -22,7 +22,7 @@ namespace kts_travels.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("kts_travels.Domain.Entities.Site", b =>
+            modelBuilder.Entity("kts_travels.Core.Domain.Entities.Site", b =>
                 {
                     b.Property<int>("SiteId")
                         .ValueGeneratedOnAdd()
@@ -38,7 +38,7 @@ namespace kts_travels.Migrations
                     b.ToTable("Sites");
                 });
 
-            modelBuilder.Entity("kts_travels.Domain.Entities.TripLog", b =>
+            modelBuilder.Entity("kts_travels.Core.Domain.Entities.TripLog", b =>
                 {
                     b.Property<int>("TripId")
                         .ValueGeneratedOnAdd()
@@ -55,9 +55,6 @@ namespace kts_travels.Migrations
                     b.Property<int>("LocationId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Remark")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("StartingKm")
                         .HasColumnType("int");
 
@@ -73,7 +70,7 @@ namespace kts_travels.Migrations
                     b.ToTable("TripLog", (string)null);
                 });
 
-            modelBuilder.Entity("kts_travels.Domain.Entities.Vehicle", b =>
+            modelBuilder.Entity("kts_travels.Core.Domain.Entities.Vehicle", b =>
                 {
                     b.Property<int>("VehicleId")
                         .ValueGeneratedOnAdd()
@@ -97,7 +94,7 @@ namespace kts_travels.Migrations
                     b.ToTable("Vehicles");
                 });
 
-            modelBuilder.Entity("kts_travels.Domain.Entities.VehicleSummary", b =>
+            modelBuilder.Entity("kts_travels.Core.Domain.Entities.VehicleSummary", b =>
                 {
                     b.Property<int>("SummaryId")
                         .ValueGeneratedOnAdd()
@@ -144,15 +141,15 @@ namespace kts_travels.Migrations
                     b.ToTable("VehicleSummary", (string)null);
                 });
 
-            modelBuilder.Entity("kts_travels.Domain.Entities.TripLog", b =>
+            modelBuilder.Entity("kts_travels.Core.Domain.Entities.TripLog", b =>
                 {
-                    b.HasOne("kts_travels.Domain.Entities.Site", "Location")
+                    b.HasOne("kts_travels.Core.Domain.Entities.Site", "Location")
                         .WithMany("TripLogs")
                         .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("kts_travels.Domain.Entities.Vehicle", "Vehicle")
+                    b.HasOne("kts_travels.Core.Domain.Entities.Vehicle", "Vehicle")
                         .WithMany("TripLogs")
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -163,15 +160,15 @@ namespace kts_travels.Migrations
                     b.Navigation("Vehicle");
                 });
 
-            modelBuilder.Entity("kts_travels.Domain.Entities.VehicleSummary", b =>
+            modelBuilder.Entity("kts_travels.Core.Domain.Entities.VehicleSummary", b =>
                 {
-                    b.HasOne("kts_travels.Domain.Entities.Site", "Location")
+                    b.HasOne("kts_travels.Core.Domain.Entities.Site", "Location")
                         .WithMany("VehicleSummaries")
                         .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("kts_travels.Domain.Entities.Vehicle", "Vehicle")
+                    b.HasOne("kts_travels.Core.Domain.Entities.Vehicle", "Vehicle")
                         .WithMany()
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -182,14 +179,14 @@ namespace kts_travels.Migrations
                     b.Navigation("Vehicle");
                 });
 
-            modelBuilder.Entity("kts_travels.Domain.Entities.Site", b =>
+            modelBuilder.Entity("kts_travels.Core.Domain.Entities.Site", b =>
                 {
                     b.Navigation("TripLogs");
 
                     b.Navigation("VehicleSummaries");
                 });
 
-            modelBuilder.Entity("kts_travels.Domain.Entities.Vehicle", b =>
+            modelBuilder.Entity("kts_travels.Core.Domain.Entities.Vehicle", b =>
                 {
                     b.Navigation("TripLogs");
                 });

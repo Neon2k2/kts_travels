@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace kts_travels.Domain.Entities
+namespace kts_travels.Core.Domain.Entities
 {
     public class TripLog
     {
@@ -23,6 +23,6 @@ namespace kts_travels.Domain.Entities
         [Required(ErrorMessage = "Starting kilometers are required.")]
         public int StartingKm { get; set; }
 
-        public string Remark { get; set; }
+
     }
 }
