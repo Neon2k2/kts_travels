@@ -1,17 +1,17 @@
-﻿using kts_travels.Application.Services.Interfaces;
-using kts_travels.Domain.Entities;
-using kts_travels.Infrastructure.Persistence;
+﻿using kts_travels.SharedServices.Application.Services.Interfaces;
+using kts_travels.SharedServices.Domain.Entities;
+using kts_travels.SharedServices.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using OfficeOpenXml;
 
-namespace kts_travels.Application.Services
+namespace kts_travels.SharedServices.Application.Services
 {
     public class ExcelImportService(AppDbContext context, ILogger<ExcelImportService> logger) : IExcelImportService
     {
         private readonly AppDbContext _context = context;
-        private readonly ILogger<ExcelImportService> _logger = logger; 
+        private readonly ILogger<ExcelImportService> _logger = logger;
 
 
         public async Task ImportDataFromExcelAsync(Stream excelFile)
@@ -82,7 +82,6 @@ namespace kts_travels.Application.Services
                             var tripLog = new TripLog
                             {
                                 VehicleId = existingVehicle.VehicleId, // Reference the VehicleId
-                                VehicleNO = vehicleNo,
                                 Date = date,
                                 DieselLiters = (decimal?)dieselLiters ?? 0,
                                 StartingKm = startingKm ?? 0,
@@ -90,7 +89,7 @@ namespace kts_travels.Application.Services
                             };
 
                             _context.TripLogs.Add(tripLog);
-                            _logger.LogInformation("Added TripLog for vehicle {vehicleNo}: Date = {date}, DieselLiters = {dieselLiters}, StartingKm = {startingKm}", vehicleNo, date, dieselLiters,startingKm);
+                            _logger.LogInformation("Added TripLog for vehicle {vehicleNo}: Date = {date}, DieselLiters = {dieselLiters}, StartingKm = {startingKm}", vehicleNo, date, dieselLiters, startingKm);
                         }
                     }
                 }

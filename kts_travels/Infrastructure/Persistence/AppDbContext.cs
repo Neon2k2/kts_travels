@@ -1,8 +1,8 @@
-﻿using kts_travels.Domain.Entities;
-using kts_travels.WebAPI.Configuration;
+﻿using kts_travels.SharedServices.Domain.Entities;
+using kts_travels.SharedServices.Application.Configuration;
 using Microsoft.EntityFrameworkCore;
 
-namespace kts_travels.Infrastructure.Persistence
+namespace kts_travels.SharedServices.Infrastructure.Persistence
 {
     public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
     {

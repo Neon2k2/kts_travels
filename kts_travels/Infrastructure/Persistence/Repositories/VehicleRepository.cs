@@ -1,8 +1,8 @@
-﻿using kts_travels.Application.Dtos;
-using kts_travels.Domain.Entities;
+﻿using kts_travels.SharedServices.Application.Dtos;
+using kts_travels.SharedServices.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using kts_travels.Domain.Repositories;
-namespace kts_travels.Infrastructure.Persistence.Repositories
+using kts_travels.SharedServices.Domain.Repositories;
+namespace kts_travels.SharedServices.Infrastructure.Persistence.Repositories
 {
     public class VehicleRepository(AppDbContext context, ILogger<VehicleRepository> logger) : IVehicleRepository
     {

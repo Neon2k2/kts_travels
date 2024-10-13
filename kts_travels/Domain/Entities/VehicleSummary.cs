@@ -1,7 +1,7 @@
-﻿using kts_travels.Domain.Entities;
+﻿using kts_travels.SharedServices.Domain.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace kts_travels.Domain.Entities
+namespace kts_travels.SharedServices.Domain.Entities
 {
     public class VehicleSummary
     {

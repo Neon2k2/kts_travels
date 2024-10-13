@@ -1,8 +1,8 @@
-﻿using kts_travels.Domain.Entities;
-using kts_travels.Domain.Repositories;
+﻿using kts_travels.SharedServices.Domain.Entities;
+using kts_travels.SharedServices.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace kts_travels.Infrastructure.Persistence.Repositories
+namespace kts_travels.SharedServices.Infrastructure.Persistence.Repositories
 {
     public class TripLogRepository(AppDbContext context, ILogger<TripLogRepository> logger) : ITripLogRepository
     {
@@ -21,7 +21,7 @@ namespace kts_travels.Infrastructure.Persistence.Repositories
         public async Task<TripLog> GetLatestTripLogBeforeDateAsync(string vehicleNo, DateTime date)
         {
             return await _context.TripLogs
-                .Where(t => t.VehicleNO == vehicleNo && t.Date < date)
+                .Where(t => t.Vehicle.VehicleNo == vehicleNo && t.Date < date)
                 .OrderByDescending(t => t.Date)
                 .FirstOrDefaultAsync();
         }
@@ -31,14 +31,14 @@ namespace kts_travels.Infrastructure.Persistence.Repositories
             var endDate = startDate.AddMonths(1);
 
             return await _context.TripLogs
-                .Where(tl => tl.VehicleNO == vehicleNo && tl.Date >= startDate && tl.Date < endDate)
+                .Where(tl => tl.Vehicle.VehicleNo == vehicleNo && tl.Date >= startDate && tl.Date < endDate)
                 .ToListAsync();
         }
 
         public async Task<TripLog> GetTripLogByStartingKmAsync(string vehicleNo, int startingKm)
         {
             return await _context.TripLogs
-                .Where(t => t.VehicleNO == vehicleNo && t.StartingKm == startingKm)
+                .Where(t => t.Vehicle.VehicleNo == vehicleNo && t.StartingKm == startingKm)
                 .FirstOrDefaultAsync();
         }
 
@@ -106,7 +106,7 @@ namespace kts_travels.Infrastructure.Persistence.Repositories
             return await _context.TripLogs
                 .Include(t => t.Vehicle)
                 .Include(t => t.Location)
-                .Where(t => t.VehicleNO.Contains(vehicleNo))
+                .Where(t => t.Vehicle.VehicleNo.Contains(vehicleNo))
                 .OrderByDescending(t => t.TripId)
                 .ToListAsync();
         }
