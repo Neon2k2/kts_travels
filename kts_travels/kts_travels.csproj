@@ -7,17 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Application\Validators\**" />
-    <Compile Remove="Configuration\**" />
-    <Content Remove="Application\Validators\**" />
-    <Content Remove="Configuration\**" />
-    <EmbeddedResource Remove="Application\Validators\**" />
-    <EmbeddedResource Remove="Configuration\**" />
-    <None Remove="Application\Validators\**" />
-    <None Remove="Configuration\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="EPPlus" Version="7.4.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
@@ -31,6 +20,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\Validators\" />
+    <Folder Include="Configuration\" />
   </ItemGroup>
 
 </Project>

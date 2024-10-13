@@ -2,7 +2,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace kts_travels.SharedServices.Application.Utilities
+namespace kts_travels.WebAPI.Utilities
 {
 
     public class DateTimeConverter : JsonConverter<DateTime>

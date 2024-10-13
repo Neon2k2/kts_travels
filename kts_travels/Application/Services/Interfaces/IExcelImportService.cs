@@ -1,4 +1,4 @@
-﻿namespace kts_travels.SharedServices.Application.Services.Interfaces
+﻿namespace kts_travels.Application.Services.Interfaces
 {
     public interface IExcelImportService
     {

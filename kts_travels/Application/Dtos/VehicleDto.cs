@@ -1,5 +1,5 @@
 ﻿
-namespace kts_travels.SharedServices.Application.Dtos
+namespace kts_travels.Application.Dtos
 {
     public class VehicleDto
     {

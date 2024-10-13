@@ -1,6 +1,6 @@
-﻿using kts_travels.SharedServices.Application.Dtos;
+﻿using kts_travels.Application.Dtos;
 
-namespace kts_travels.SharedServices.Application.Services.Interfaces
+namespace kts_travels.Application.Services.Interfaces
 {
     public interface IVehicleService
     {

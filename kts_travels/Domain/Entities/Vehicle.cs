@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace kts_travels.SharedServices.Domain.Entities
+namespace kts_travels.Domain.Entities
 {
     public class Vehicle
     {

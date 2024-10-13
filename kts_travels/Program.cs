@@ -1,15 +1,17 @@
 using AutoMapper;
-using kts_travels.SharedServices.Application.Factories.Interfaces;
-using kts_travels.SharedServices.Application.Factories;
-using kts_travels.SharedServices.Application.Services;
-using kts_travels.SharedServices.Application.Services.Interfaces;
+using kts_travels.Application.Factories.Interfaces;
+using kts_travels.Application.Factories;
+using kts_travels.Application.Services;
+using kts_travels.Application.Services.Interfaces;
 
-using kts_travels.SharedServices.Infrastructure.Persistence;
-using kts_travels.SharedServices.Infrastructure.Persistence.Repositories;
-using kts_travels.SharedServices.Application.Configuration;
-using kts_travels.SharedServices.Application.Utilities;
+using kts_travels.Infrastructure.Persistence;
+using kts_travels.Infrastructure.Persistence.Repositories;
+using kts_travels.WebAPI.Configuration;
+using kts_travels.WebAPI.Middlewares;
+using kts_travels.WebAPI.Utilities;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using kts_travels.SharedServices.Domain.Repositories;
+using kts_travels.Domain.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,6 +55,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

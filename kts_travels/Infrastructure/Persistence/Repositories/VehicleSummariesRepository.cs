@@ -1,8 +1,8 @@
-﻿using kts_travels.SharedServices.Domain.Entities;
-using kts_travels.SharedServices.Domain.Repositories;
+﻿using kts_travels.Domain.Entities;
+using kts_travels.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace kts_travels.SharedServices.Infrastructure.Persistence.Repositories
+namespace kts_travels.Infrastructure.Persistence.Repositories
 {
 public class VehicleSummariesRepository(AppDbContext context) : IVehicleSummariesRepository
 {
