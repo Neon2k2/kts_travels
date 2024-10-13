@@ -1,6 +1,6 @@
-﻿using kts_travels.SharedServices.Domain.Entities;
+﻿using kts_travels.Domain.Entities;
 
-namespace kts_travels.SharedServices.Domain.Repositories
+namespace kts_travels.Domain.Repositories
 {
     public interface ITripLogRepository
     {

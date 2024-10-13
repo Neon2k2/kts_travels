@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace kts_travels.SharedServices.Migrations
+namespace kts_travels.Migrations
 {
     /// <inheritdoc />
-    public partial class newDb : Migration
+    public partial class newDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -48,6 +48,7 @@ namespace kts_travels.SharedServices.Migrations
                     VehicleId = table.Column<int>(type: "int", nullable: false),
                     LocationId = table.Column<int>(type: "int", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    VehicleNO = table.Column<string>(type: "nvarchar(17)", maxLength: 17, nullable: false),
                     DieselLiters = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     StartingKm = table.Column<int>(type: "int", nullable: false)
                 },

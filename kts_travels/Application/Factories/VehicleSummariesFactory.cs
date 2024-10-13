@@ -1,13 +1,18 @@
-﻿using kts_travels.SharedServices.Application.Dtos;
-using kts_travels.SharedServices.Application.Factories.Interfaces;
-using kts_travels.SharedServices.Domain.Entities;
-using kts_travels.SharedServices.Domain.Repositories;
+﻿using kts_travels.Application.Dtos;
+using kts_travels.Application.Factories.Interfaces;
+using kts_travels.Domain.Entities;
+using kts_travels.Domain.Repositories;
 
-namespace kts_travels.SharedServices.Application.Factories
+namespace kts_travels.Application.Factories
 {
-    public class VehicleSummariesFactory(IVehicleSummariesRepository vehicleSummaryRepository) : IVehicleSummariesFactory
+    public class VehicleSummariesFactory : IVehicleSummariesFactory
     {
-        private readonly IVehicleSummariesRepository _vehicleSummaryRepository = vehicleSummaryRepository;
+        private readonly IVehicleSummariesRepository _vehicleSummaryRepository;
+
+        public VehicleSummariesFactory(IVehicleSummariesRepository vehicleSummaryRepository)
+        {
+            _vehicleSummaryRepository = vehicleSummaryRepository;
+        }
 
         public async Task<VehicleSummaryDto> CreateOrUpdateVehicleSummaryAsync(int vehicleId, int locationId, DateTime month, IEnumerable<TripLog> tripLogs)
         {
@@ -36,7 +41,7 @@ namespace kts_travels.SharedServices.Application.Factories
                 SummaryId = existingSummary.SummaryId,
                 SRNo = existingSummary.SRNo,
                 Month = existingSummary.Month,
-                VehicleNo = tripLogs.First().Vehicle.VehicleNo, // Use the related vehicle's vehicle number                                                                            // Use the first trip log's vehicle number
+                VehicleNo = tripLogs.First().VehicleNO, // Use the first trip log's vehicle number
                 LocationId = existingSummary.LocationId,
                 TotalDaysFilledDiesel = existingSummary.TotalDaysFilledDiesel,
                 TotalDiesel = existingSummary.TotalDiesel,
@@ -47,7 +52,7 @@ namespace kts_travels.SharedServices.Application.Factories
             };
         }
 
-        private static (int TotalDaysFilledDiesel, decimal TotalDiesel, int OpeningKms, int ClosingKms, int TotalKmRun, decimal Average) CalculateSummaryValues(IEnumerable<TripLog> tripLogs)
+        private (int TotalDaysFilledDiesel, decimal TotalDiesel, int OpeningKms, int ClosingKms, int TotalKmRun, decimal Average) CalculateSummaryValues(IEnumerable<TripLog> tripLogs)
         {
             var firstTripLog = tripLogs.OrderBy(tl => tl.Date).First();
             var lastTripLog = tripLogs.OrderByDescending(tl => tl.Date).First();

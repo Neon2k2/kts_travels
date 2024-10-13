@@ -1,4 +1,4 @@
-﻿namespace kts_travels.SharedServices.Application.Dtos
+﻿namespace kts_travels.Application.Dtos
 {
     public class TripLogDto
     {
@@ -9,7 +9,6 @@
         public DateTime Date { get; set; } // Date of the log entry
         public decimal DieselLiters { get; set; } // Amount of diesel filled
         public int StartingKm { get; set; } // Starting kilometer reading of the vehicle
-        public string Remark { get; set; }
 
     }
 }
